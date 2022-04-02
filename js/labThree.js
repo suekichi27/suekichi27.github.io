@@ -32,13 +32,17 @@ window.onload = () => {
   const sunTexture = sunLoader.load('js/img/sun_2k.jpg');
   sunTexture.anisotropy = 16;
 
+  const earthLoader = new THREE.TextureLoader();
+  const earthTexture = earthLoader.load('js/img/earth.jpg');
+  earthTexture.anisotropy = 16;
+
   const geoSun = new THREE.SphereGeometry(2300, 80, 80);
   const matSun = new THREE.MeshPhongMaterial({ map: sunTexture, emissive: 0xff0000 });
   const sun = new THREE.Mesh(geoSun, matSun);
   scene.add(sun);
 
   const geoEarth = new THREE.SphereGeometry(100, 40, 40);
-  const matEarth = new THREE.MeshNormalMaterial();
+  const matEarth = new THREE.MeshPhongMaterial({ map: earthTexture});
   const earth = new THREE.Mesh(geoEarth, matEarth);
   scene.add(earth);
 
