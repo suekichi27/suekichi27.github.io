@@ -29,7 +29,7 @@ window.onload = () => {
   scene.add(light);
 
   const sunLoader = new THREE.TextureLoader();
-  const sunTexture = sunLoader.load('js/img/sun.jpg');
+  const sunTexture = sunLoader.load('js/img/sun_2k.jpg');
   sunTexture.anisotropy = 16;
 
   const geoSun = new THREE.SphereGeometry(2300, 80, 80);
