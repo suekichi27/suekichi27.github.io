@@ -55,7 +55,7 @@ window.onload = () => {
   const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 300000);
   // camera.position.set(0, 0, 15000);
 
-  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  // const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
   // создаем источник рассеянного света
   const light = new THREE.AmbientLight(0xffffff);
@@ -105,7 +105,7 @@ window.onload = () => {
     navigateToPlanet(earth, camera);
 
     t += 0.01;
-    controls.update();
+    // controls.update();
     renderer.render(scene, camera);
   };
 
