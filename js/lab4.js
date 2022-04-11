@@ -66,7 +66,7 @@ window.onload = () => {
   const light = new THREE.AmbientLight(0xffffff);
   scene.add(light);
 
-  const pointLight = new THREE.PointLight(0x707070, 3, 200000);
+  const pointLight = new THREE.PointLight(0x222222, 3, 200000);
   pointLight.position.set(0,0,0);
   pointLight.castShadow = true;
   pointLight.shadow.mapSize.width = 2048;
