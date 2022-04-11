@@ -11,17 +11,29 @@ const createPlanet = (rad, widthSeg, heightSeg, image) => {
   const texture = applyTexture(image);
   const geometry = new THREE.SphereGeometry(rad, widthSeg, heightSeg);
   let material;
+
   if (rad === 2300) {
     material = new THREE.MeshPhongMaterial( {map: texture, emissive: 0xff0000});
+    return new THREE.Mesh(geometry, material);
   }
+
   material = new THREE.MeshPhongMaterial({map: texture});
-  return new THREE.Mesh(geometry, material);
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.castShadow = true;
+  return mesh;
 }
 
 // задаем вращение планете
 const setDefaultRotation = (mesh, t, speed, distance) => {
   mesh.position.x = Math.sin(t * speed) * distance;
   mesh.position.z = Math.cos(t * speed) * distance;
+}
+
+// переход к планете
+const navigateToPlanet = (mesh, camera) => {
+  camera.position.z = mesh.position.z + 500;
+  camera.position.x = mesh.position.x + 500;
+  camera.lookAt(mesh.position);
 }
 
 window.onload = () => {
@@ -46,24 +58,32 @@ window.onload = () => {
 
   // создаем камеру
   const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 300000);
-  camera.position.set(0, 0, 15000);
+  camera.position.set(0, 0, 25000);
 
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-  // создаем источник рассеянного света
+  // создаем источники света
   const light = new THREE.AmbientLight(0xffffff);
   scene.add(light);
+
+  const pointLight = new THREE.PointLight(0x707070, 3, 200000);
+  pointLight.position.set(0,0,0);
+  pointLight.castShadow = true;
+  pointLight.shadow.mapSize.width = 2048;
+  pointLight.shadow.mapSize.height = 2048;
+  scene.add(pointLight);
 
   // наполняем солнечную систему
   const sun = createPlanet(2300, 80, 80, 'js/img/sun_2k.jpg');
   const earth = createPlanet(100, 40, 40, 'js/img/earth.jpg');
   const mercury = createPlanet(60, 20, 20, 'js/img/mercury.jpg');
-  const venus = createPlanet(900, 20, 20, 'js/img/venus.jpg');
+  const venus = createPlanet(90, 20, 20, 'js/img/venus.jpg');
   const mars = createPlanet(80, 20, 20, 'js/img/mars.jpg');
-  const jupiter = createPlanet(1500, 20, 20, 'js/img/jupiter.jpg');
-  const saturn = createPlanet(1000, 80, 80, 'js/img/saturn.jpg');
-  const uranus = createPlanet(600, 80, 80, 'js/img/uranus.jpg');
-  const neptune = createPlanet(800, 80, 80, 'js/img/neptune.jpg');
+  const jupiter = createPlanet(350, 20, 20, 'js/img/jupiter.jpg');
+  const saturn = createPlanet(230, 40, 40, 'js/img/saturn.jpg');
+  const uranus = createPlanet(150, 40, 40, 'js/img/uranus.jpg');
+  const neptune = createPlanet(140, 40, 40, 'js/img/neptune.jpg');
+  const pluto = createPlanet(40, 20, 20, 'js/img/pluto.jpg');
 
   scene.add(sun);
   scene.add(earth);
@@ -74,6 +94,7 @@ window.onload = () => {
   scene.add(saturn);
   scene.add(uranus);
   scene.add(neptune);
+  scene.add(pluto);
 
   let t = 0;
 
@@ -87,10 +108,11 @@ window.onload = () => {
     setDefaultRotation(mercury, t, 0.2, 4000);
     setDefaultRotation(venus, t, 0.2, 5500);
     setDefaultRotation(mars, t, 0.08, 8000);
-    setDefaultRotation(jupiter, t, 0.08, 13000);
-    setDefaultRotation(saturn, t, 0.03, 17000);
-    setDefaultRotation(uranus, t, 0.02, 25000);
-    setDefaultRotation(neptune, t, 0.01, 30000);
+    setDefaultRotation(jupiter, t, 0.08, 10700);
+    setDefaultRotation(saturn, t, 0.03, 12000);
+    setDefaultRotation(uranus, t, 0.02, 15000);
+    setDefaultRotation(neptune, t, 0.01, 17000);
+    setDefaultRotation(pluto, t, 0.01, 20000);
 
     t += 0.01;
     controls.update();
