@@ -24,7 +24,7 @@ const setDefaultRotation = (mesh, t, speed, distance) => {
   mesh.position.z = Math.cos(t * speed) * distance;
 }
 
-const navigateToPlanet = (mesh) => {
+const navigateToPlanet = (mesh, camera) => {
   camera.position.z = mesh.position.z + 500;
   camera.lookAt(mesh.position);
 }
@@ -100,7 +100,7 @@ window.onload = () => {
     setDefaultRotation(neptune, t, 0.01, 17000);
     setDefaultRotation(pluto, t, 0.01, 20000);
 
-    navigateToPlanet(earth);
+    navigateToPlanet(earth, camera);
 
     t += 0.01;
     controls.update();
