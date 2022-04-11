@@ -31,8 +31,8 @@ const setDefaultRotation = (mesh, t, speed, distance) => {
 
 // переход к планете
 const navigateToPlanet = (mesh, camera) => {
-  camera.position.z = mesh.position.z + 500;
-  camera.position.x = mesh.position.x + 500;
+  camera.position.z = mesh.position.z + 1500;
+  camera.position.x = mesh.position.x + 1500;
   camera.lookAt(mesh.position);
 }
 
@@ -75,15 +75,15 @@ window.onload = () => {
 
   // наполняем солнечную систему
   const sun = createPlanet(2300, 80, 80, 'js/img/sun_2k.jpg');
-  const earth = createPlanet(100, 40, 40, 'js/img/earth.jpg');
-  const mercury = createPlanet(60, 20, 20, 'js/img/mercury.jpg');
-  const venus = createPlanet(90, 20, 20, 'js/img/venus.jpg');
-  const mars = createPlanet(80, 20, 20, 'js/img/mars.jpg');
-  const jupiter = createPlanet(350, 20, 20, 'js/img/jupiter.jpg');
-  const saturn = createPlanet(230, 40, 40, 'js/img/saturn.jpg');
-  const uranus = createPlanet(150, 40, 40, 'js/img/uranus.jpg');
-  const neptune = createPlanet(140, 40, 40, 'js/img/neptune.jpg');
-  const pluto = createPlanet(40, 20, 20, 'js/img/pluto.jpg');
+  const earth = createPlanet(100, 40, 40, 'js/img/earth_2k.jpg');
+  const mercury = createPlanet(60, 20, 20, 'js/img/mercury_2k.jpg');
+  const venus = createPlanet(90, 20, 20, 'js/img/venus_2k.jpg');
+  const mars = createPlanet(80, 20, 20, 'js/img/mars_2k.jpg');
+  const jupiter = createPlanet(350, 20, 20, 'js/img/jupiter_2k.jpg');
+  const saturn = createPlanet(230, 40, 40, 'js/img/saturn_2k.jpg');
+  const uranus = createPlanet(150, 40, 40, 'js/img/uranus_2k.jpg');
+  const neptune = createPlanet(140, 40, 40, 'js/img/neptune_2k.jpg');
+  const pluto = createPlanet(40, 20, 20, 'js/img/pluto_2k.jpg');
 
   scene.add(sun);
   scene.add(earth);
