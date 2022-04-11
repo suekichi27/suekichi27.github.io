@@ -1,6 +1,32 @@
+// применяем текстуру к планете
+const applyTexture = (image) => {
+  const loader = new THREE.TextureLoader();
+  const texture = loader.load(image);
+  texture.anisotropy = 16;
+  return texture;
+}
+
+// создаем планету
+const createPlanet = (rad, widthSeg, heightSeg, image) => {
+  const texture = applyTexture(image);
+  const geometry = new THREE.SphereGeometry(rad, widthSeg, heightSeg);
+  let material;
+  if (radius === 2300) {
+    material = new THREE.MeshPhongMateril( {map: texture, emissive: 0xff0000});
+  }
+  material = new THREE.MeshPhongMaterial({map: texture});
+  return new THREE.Mesh(geometry, material);
+}
+
+// задаем вращение планете
+const setDefaultRotation = (mesh, t, speed, distance) => {
+  mesh.position.x = Math.sin(t * speed) * distance;
+  mesh.position.z = Math.cos(t * speed) * distance;
+}
+
 window.onload = () => {
 
-  //высота и ширина
+  // высота и ширина
   const width = window.innerWidth;
   const height = window.innerHeight;
 
@@ -28,42 +54,26 @@ window.onload = () => {
   const light = new THREE.AmbientLight(0xffffff);
   scene.add(light);
 
-  const sunLoader = new THREE.TextureLoader();
-  const sunTexture = sunLoader.load('js/img/sun_2k.jpg');
-  sunTexture.anisotropy = 16;
+  // наполняем солнечную систему
+  const sun = createPlanet(2300, 80, 80, 'js/img/sun_2k.jpg');
+  const earth = createPlanet(100, 40, 40, 'js/img/earth.jpg');
+  const mercury = createPlanet(60, 20, 20, 'js/img/mercury.jpg');
+  const venus = createPlanet(900, 20, 20, 'js/img/venus.jpg');
+  const mars = createPlanet(80, 20, 20, 'js/img/mars.jpg');
+  const jupiter = createPlanet(1500, 20, 20, 'js/img/jupiter.jpg');
+  const saturn = createPlanet(1000, 80, 80, 'js/img/saturn.jpg');
+  const uranus = createPlanet(600, 80, 80, 'js/img/uranus.jpg');
+  const neptune = createPlanet(800, 80, 80, 'js/img/neptune.jpg');
 
-  const earthLoader = new THREE.TextureLoader();
-  const earthTexture = earthLoader.load('js/img/earth.jpg');
-  earthTexture.anisotropy = 16;
-
-  const geoSun = new THREE.SphereGeometry(2300, 80, 80);
-  const matSun = new THREE.MeshPhongMaterial({ map: sunTexture, emissive: 0xff0000 });
-  const sun = new THREE.Mesh(geoSun, matSun);
   scene.add(sun);
-
-  const geoEarth = new THREE.SphereGeometry(100, 40, 40);
-  const matEarth = new THREE.MeshPhongMaterial({ map: earthTexture});
-  const earth = new THREE.Mesh(geoEarth, matEarth);
   scene.add(earth);
-
-  const geoMercury = new THREE.SphereGeometry(60, 20, 20);
-  const matMercury = new THREE.MeshNormalMaterial();
-  const mercury = new THREE.Mesh(geoMercury, matMercury);
   scene.add(mercury);
-
-  const geoVenus = new THREE.SphereGeometry(90, 20, 20);
-  const matVenus = new THREE.MeshNormalMaterial();
-  const venus = new THREE.Mesh(geoVenus, matVenus);
   scene.add(venus);
-
-  const geoMars = new THREE.SphereGeometry(80, 20, 20);
-  const matMars = new THREE.MeshNormalMaterial();
-  const mars = new THREE.Mesh(geoMars, matMars);
   scene.add(mars);
-
-  const clock = new THREE.Clock();
-
-  let frameTime = 0;
+  scene.add(jupiter);
+  scene.add(saturn);
+  scene.add(uranus);
+  scene.add(neptune);
 
   let t = 0;
 
@@ -71,27 +81,21 @@ window.onload = () => {
   let rendering = () => {
     requestAnimationFrame(rendering);
 
-    frameTime = clock.getDelta();
-
-    t += 0.5 * frameTime;
-
     sun.rotation.y += 0.001;
 
-    earth.position.x = Math.sin(t * 0.5) * 7500;
-    earth.position.z = Math.cos(t * 0.5) * 7500;
+    setDefaultRotation(earth, t, 0.5, 7500);
+    setDefaultRotation(mercury, t, 0.2, 4000);
+    setDefaultRotation(venus, t, 0.2, 5500);
+    setDefaultRotation(mars, t, 0.08, 8000);
+    setDefaultRotation(jupiter, t, 0.08, 13000);
+    setDefaultRotation(saturn, t, 0.03, 17000);
+    setDefaultRotation(uranus, t, 0.02, 25000);
+    setDefaultRotation(neptune, t, 0.01, 30000);
 
-    mercury.position.x = Math.sin(t * 0.3) * 4000;
-    mercury.position.z = Math.cos(t * 0.3) * 4000;
-
-    venus.position.x = Math.sin(t * 0.2) * 5500;
-    venus.position.z = Math.cos(t * 0.2) * 5500;
-
-    mars.position.x = Math.sin(t * 0.1) * 8000;
-    mars.position.z = Math.cos(t * 0.1) * 8000;
-
+    t += 0.01;
     controls.update();
     renderer.render(scene, camera);
   };
-  rendering();
 
+  rendering();
 }
