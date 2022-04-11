@@ -53,7 +53,7 @@ window.onload = () => {
 
   // создаем камеру
   const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 300000);
-  camera.position.set(0, 0, 15000);
+  // camera.position.set(0, 0, 15000);
 
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
