@@ -110,7 +110,7 @@ window.onload = () => {
   }
   // создаем систему частиц
   
-  const ring = new THREE.POINTS(ringSaturnGeometry, ringSaturnMat);
+  const ring = new THREE.Points(ringSaturnGeometry, ringSaturnMat);
   ring.castShadow = true;
   scene.add(ring);
 
