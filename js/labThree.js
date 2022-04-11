@@ -11,7 +11,7 @@ const createPlanet = (rad, widthSeg, heightSeg, image) => {
   const texture = applyTexture(image);
   const geometry = new THREE.SphereGeometry(rad, widthSeg, heightSeg);
   let material;
-  if (radius === 2300) {
+  if (rad === 2300) {
     material = new THREE.MeshPhongMateril( {map: texture, emissive: 0xff0000});
   }
   material = new THREE.MeshPhongMaterial({map: texture});
