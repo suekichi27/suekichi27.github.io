@@ -64,8 +64,8 @@ window.onload = function() {
 
      // camera.lookAt(sun.position);
 
-        camera.position.set(earth.position.x, 0, earth.position.z+500);
-        camera.lookAt(earth.position);
+       // camera.position.set(earth.position.x, 0, earth.position.z+500);
+       // camera.lookAt(earth.position);
 
 
    //      camera.position.set(mercury.position.x, 0, mercury.position.z + 500);
@@ -93,14 +93,14 @@ window.onload = function() {
     
     var loader = new THREE.TextureLoader();
 
-    var sunTexture = loader.load('../img/sun.jpg');
+    var sunTexture = loader.load('js/img/sun.jpg');
     sunTexture.anisotropy = 6;
     var matSun = new THREE.MeshPhongMaterial({map: sunTexture, emissive: 0xD17F00});
     var geoSun = new THREE.SphereGeometry(2300, 80, 80);
     var sun = new THREE.Mesh(geoSun, matSun);
     scene.add(sun);
     
-    var mercuryTexture = loader.load('../img/mercury.jpg');
+    var mercuryTexture = loader.load('js/img/mercury.jpg');
     mercuryTexture.anisotropy = 16;
     var geoMercury = new THREE.SphereGeometry(60, 20, 20);
     var matMercury = new THREE.MeshPhongMaterial({map: mercuryTexture});
@@ -108,7 +108,7 @@ window.onload = function() {
     mercury.castShadow = true;
     scene.add(mercury);
 
-    var venusTexture = loader.load('../img/venus.jpg');
+    var venusTexture = loader.load('js/img/venus.jpg');
     venusTexture.anisotropy = 16;
     var geoVenus = new THREE.SphereGeometry(90, 20, 20);
     var matVenus = new THREE.MeshPhongMaterial({map: venusTexture});
@@ -116,7 +116,7 @@ window.onload = function() {
     venus.castShadow = true;
     scene.add(venus);
 
-    var earthTexture = loader.load('../img/earth.jpg');
+    var earthTexture = loader.load('js/img/earth.jpg');
     earthTexture.anisotropy = 16;
     var geoEarth = new THREE.SphereGeometry(100, 40, 40);
     var matEarth = new THREE.MeshPhongMaterial({map: earthTexture});
@@ -124,7 +124,7 @@ window.onload = function() {
     earth.castShadow = true;
     scene.add(earth);
 
-    var marsTexture = loader.load('../img/mars.jpg');
+    var marsTexture = loader.load('js/img/mars.jpg');
     marsTexture.anisotropy = 16;
     var geoMars = new THREE.SphereGeometry(80, 20, 20);
     var matMars = new THREE.MeshPhongMaterial({map: marsTexture});
@@ -132,7 +132,7 @@ window.onload = function() {
     mars.castShadow = true;
     scene.add(mars);
 
-    var jupiterTexture = loader.load('../img/jupiter.jpg');
+    var jupiterTexture = loader.load('js/img/jupiter.jpg');
     jupiterTexture.anisotropy = 16;
     var geoJupiter = new THREE.SphereGeometry(350, 20, 20);
     var matJupiter = new THREE.MeshPhongMaterial({map: jupiterTexture});
@@ -140,7 +140,7 @@ window.onload = function() {
     jupiter.castShadow = true;
     scene.add(jupiter);
 
-    var saturnTexture = loader.load('./img/saturn.jpg');
+    var saturnTexture = loader.load('js/img/saturn.jpg');
     saturnTexture.anisotropy = 16;
     var geoSaturn = new THREE.SphereGeometry(230, 20, 20);
     var matSaturn = new THREE.MeshPhongMaterial({map: saturnTexture});
