@@ -24,8 +24,10 @@ const setDefaultRotation = (mesh, t, speed, distance) => {
   mesh.position.z = Math.cos(t * speed) * distance;
 }
 
+// переход к планете
 const navigateToPlanet = (mesh, camera) => {
   camera.position.z = mesh.position.z + 500;
+  camera.position.x = mesh.position.x + 500;
   camera.lookAt(mesh.position);
 }
 
