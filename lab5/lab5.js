@@ -96,7 +96,6 @@ window.onload = () => {
   scene.add(pluto);
 
   // создаем кольцо Сатурна
- 
   const ringSaturnGeometry = new THREE.Geometry();
   const ringSaturnMat = new THREE.PointsMaterial({ color: 0x3A3A3A, size: 1, sizeAttenuation: false });
 
@@ -107,8 +106,8 @@ window.onload = () => {
       vertex.z = Math.cos(Math.PI / 180 * i) * (550 - i / 80);
       ringSaturnGeometry.vertices.push(vertex);
   }
+
   // создаем систему частиц
-  
   const ring = new THREE.Points(ringSaturnGeometry, ringSaturnMat);
   ring.castShadow = true;
   scene.add(ring);
@@ -123,7 +122,7 @@ window.onload = () => {
 
     ring.position.x = saturn.position.x;
     ring.position.z = saturn.position.z;
-    ring.rotation.y += 0.001;
+    ring.rotation.y -= 0.001;
 
     setDefaultRotation(earth, t, 0.5, 7500);
     setDefaultRotation(mercury, t, 0.2, 4000);

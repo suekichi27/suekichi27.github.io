@@ -30,7 +30,9 @@ window.onload = () => {
 
   // создаем звездное небо
   const starsGeometry = new THREE.Geometry();
-  const starsMaterial = new THREE.PointsMaterial({ color: 0xA8A8FF, opacity: 0.1, opacity: true, size: 1, sizeAttenuation: false});
+  const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, opacity: 0.1, opacity: true, size: 1, sizeAttenuation: false});
+  const starsMaterialBlue = new THREE.PointsMaterial({ color: 0xA8A8FF, opacity: 0.1, opacity: true, size: 1, sizeAttenuation: false});
+
 
   for (let i = 0; i < 20000; i++) {
     const vertex = new THREE.Vector3();
@@ -44,6 +46,10 @@ window.onload = () => {
   const stars = new THREE.Points(starsGeometry, starsMaterial);
   stars.scale.set(200, 200, 200);
   scene.add(stars);
+
+  const starsBlue = new THREE.Points(starsGeometry, starsMaterialBlue);
+  starsBlue.scale.set(250, 250, 250);
+  scene.add(starsBlue);
 
   let t = 0;
 
