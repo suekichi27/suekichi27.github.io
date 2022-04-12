@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('./fonts/MK3.ttf');
+    }
+
+    .menuBackground {
+        background-image: url(./img/UMK3background.png);
+        background-size: cover;
+    }
+
+    .centerHeader {
+        color: white;
+        text-align: center;
+        text-shadow: 3px 3px 4px black;
+        font-family: 'CustomFont';
+        font-size: 64px;
+        transform: translate(0, 270%);
+    }
+
+    .center {
+        height: 200px;
+        transform: translate(0, 170%);
+        display: flex;
+        justify-content: center;
+    }
+
+    .buttonStyles {
+        font-family: 'CustomFont';
+    }
+
+    .imageScale {
+        transform: scale(1.3, 1.3) translate(0, -10%);
+    }
+
+    tab {
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    .btnChange {
+        font-family: 'CustomFont';
+        box-shadow: 3px 3px 4px black;
+    }
