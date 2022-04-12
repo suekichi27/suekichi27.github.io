@@ -60,6 +60,25 @@ const navigateToPlanet = (mesh, camera) => {
   camera.lookAt(mesh.position);
 }
 
+// создаем звездное небо
+const addStars = (chosenColor, multiplyValue) => {
+  const starsGeometry = new THREE.Geometry();
+  const starsMaterial = new THREE.PointsMaterial({ color: chosenColor, opacity: 0.1, opacity: true, size: 1, sizeAttenuation: false});
+
+  for (let i = 0; i < 20000; i++) {
+    const vertex = new THREE.Vector3();
+    vertex.x = Math.random() * 2 - 1;
+    vertex.y = Math.random() * 2 - 1;
+    vertex.z = Math.random() * 2 - 1;
+    vertex.multiplyScalar(multiplyValue);
+    starsGeometry.vertices.push(vertex);
+  }
+
+  const stars = new THREE.Points(starsGeometry, starsMaterial);
+  stars.scale.set(200, 200, 200);
+  return stars;
+}
+
 window.onload = () => {
 
   // высота и ширина
@@ -126,9 +145,9 @@ window.onload = () => {
 
   for (let i = 0; i < 20000; i++) {
       const vertex = new THREE.Vector3();
-      vertex.x = Math.sin(Math.PI / 180 * i) * (550 - i / 80);
+      vertex.x = Math.sin(180 / Math.PI  * i) * (550 - i / 80);
       vertex.y = Math.random() * 20;
-      vertex.z = Math.cos(Math.PI / 180 * i) * (550 - i / 80);
+      vertex.z = Math.cos(180 / Math.PI  * i) * (550 - i / 80);
       ringSaturnGeometry.vertices.push(vertex);
   }
 
@@ -159,22 +178,12 @@ window.onload = () => {
   neptuneOrbit.draw(scene);
   plutoOrbit.draw(scene);
 
-  // создаем звездное небо
-  const starsGeometry = new THREE.Geometry();
-  const starsMaterial = new THREE.PointsMaterial({ color: 0xA8A8FF, opacity: 0.1, opacity: true, size: 1, sizeAttenuation: false});
+  // добавляем звезды
+  const starsWhite = addStars(0xffffff, 2000);
+  const starsBlue = addStars(0x6B6BA3, 3000);
 
-  for (let i = 0; i < 20000; i++) {
-    const vertex = new THREE.Vector3();
-    vertex.x = Math.random() * 2 - 1;
-    vertex.y = Math.random() * 2 - 1;
-    vertex.z = Math.random() * 2 - 1;
-    vertex.multiplyScalar(2000);
-    starsGeometry.vertices.push(vertex);
-  }
-
-  const stars = new THREE.Points(starsGeometry, starsMaterial);
-  stars.scale.set(200, 200, 200);
-  scene.add(stars);
+  scene.add(starsWhite);
+  scene.add(starsBlue);
 
   let t = 0;
 
