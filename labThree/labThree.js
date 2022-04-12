@@ -86,11 +86,14 @@ window.onload = () => {
 
   let t = 0;
 
+  earth.rotation.y = 300;
+
   // вызываем метод рендерера и передаем в него сцену и камеру
   let rendering = () => {
     requestAnimationFrame(rendering);
 
     sun.rotation.y += 0.001;
+
 
     setDefaultRotation(earth, t, 0.5, 7500);
     setDefaultRotation(mercury, t, 0.2, 4000);
