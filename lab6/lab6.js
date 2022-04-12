@@ -93,16 +93,16 @@ window.onload = () => {
   scene.add(pointLight);
 
   // наполняем солнечную систему
-  const sun = createPlanet(2300, 80, 80, 'js/img/sun_2k.jpg');
-  const earth = createPlanet(100, 40, 40, 'js/img/earth_2k.jpg');
-  const mercury = createPlanet(60, 20, 20, 'js/img/mercury_2k.jpg');
-  const venus = createPlanet(90, 20, 20, 'js/img/venus_2k.jpg');
-  const mars = createPlanet(80, 20, 20, 'js/img/mars_2k.jpg');
-  const jupiter = createPlanet(350, 20, 20, 'js/img/jupiter_2k.jpg');
-  const saturn = createPlanet(230, 40, 40, 'js/img/saturn_2k.jpg');
-  const uranus = createPlanet(150, 40, 40, 'js/img/uranus_2k.jpg');
-  const neptune = createPlanet(140, 40, 40, 'js/img/neptune_2k.jpg');
-  const pluto = createPlanet(40, 20, 20, 'js/img/pluto_2k.jpg');
+  const sun = createPlanet(2300, 80, 80, '../img/sun_2k.jpg');
+  const earth = createPlanet(100, 40, 40, '../img/earth_2k.jpg');
+  const mercury = createPlanet(60, 20, 20, '../img/mercury_2k.jpg');
+  const venus = createPlanet(90, 20, 20, '../img/venus_2k.jpg');
+  const mars = createPlanet(80, 20, 20, '../img/mars_2k.jpg');
+  const jupiter = createPlanet(350, 20, 20, '../img/jupiter_2k.jpg');
+  const saturn = createPlanet(230, 40, 40, '../img/saturn_2k.jpg');
+  const uranus = createPlanet(150, 40, 40, '../img/uranus_2k.jpg');
+  const neptune = createPlanet(140, 40, 40, '../img/neptune_2k.jpg');
+  const pluto = createPlanet(40, 20, 20, '../img/pluto_2k.jpg');
 
   scene.add(sun);
   scene.add(earth);
@@ -154,22 +154,6 @@ window.onload = () => {
   neptuneOrbit.draw(scene);
   plutoOrbit.draw(scene);
 
-  // создаем звездное небо
-  const starsGeometry = new THREE.Geometry();
-  const starsMaterial = new THREE.PointsMaterial({ color: 0xA8A8FF, opacity: 0.1, opacity: true, size: 1, sizeAttenuation: false});
-
-  for (let i = 0; i < 20000; i++) {
-    const vertex = new THREE.Vector3();
-    vertex.x = Math.random() * 2 - 1;
-    vertex.y = Math.random() * 2 - 1;
-    vertex.z = Math.random() * 2 - 1;
-    vertex.multiplyScalar(3000);
-    starsGeometry.vertices.push(vertex);
-  }
-
-  const stars = new THREE.Points(starsGeometry, starsMaterial);
-  stars.scale.set(200, 200, 200);
-  scene.add(stars);
 
   let t = 0;
 

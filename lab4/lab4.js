@@ -11,11 +11,16 @@ const createPlanet = (rad, widthSeg, heightSeg, image) => {
   const texture = applyTexture(image);
   const geometry = new THREE.SphereGeometry(rad, widthSeg, heightSeg);
   let material;
+
   if (rad === 2300) {
     material = new THREE.MeshPhongMaterial( {map: texture, emissive: 0xff0000});
+    return new THREE.Mesh(geometry, material);
   }
+
   material = new THREE.MeshPhongMaterial({map: texture});
-  return new THREE.Mesh(geometry, material);
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.castShadow = true;
+  return mesh;
 }
 
 // задаем вращение планете
@@ -53,25 +58,32 @@ window.onload = () => {
 
   // создаем камеру
   const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 300000);
-  // camera.position.set(0, 0, 15000);
+  camera.position.set(0, 0, 25000);
 
-  // const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-  // создаем источник рассеянного света
+  // создаем источники света
   const light = new THREE.AmbientLight(0xffffff);
   scene.add(light);
 
+  const pointLight = new THREE.PointLight(0x222222, 3, 200000);
+  pointLight.position.set(0,0,0);
+  pointLight.castShadow = true;
+  pointLight.shadow.mapSize.width = 2048;
+  pointLight.shadow.mapSize.height = 2048;
+  scene.add(pointLight);
+
   // наполняем солнечную систему
-  const sun = createPlanet(2300, 80, 80, 'js/img/sun_2k.jpg');
-  const earth = createPlanet(100, 40, 40, 'js/img/earth.jpg');
-  const mercury = createPlanet(60, 20, 20, 'js/img/mercury.jpg');
-  const venus = createPlanet(90, 20, 20, 'js/img/venus.jpg');
-  const mars = createPlanet(80, 20, 20, 'js/img/mars.jpg');
-  const jupiter = createPlanet(350, 20, 20, 'js/img/jupiter.jpg');
-  const saturn = createPlanet(230, 40, 40, 'js/img/saturn.jpg');
-  const uranus = createPlanet(150, 40, 40, 'js/img/uranus.jpg');
-  const neptune = createPlanet(140, 40, 40, 'js/img/neptune.jpg');
-  const pluto = createPlanet(40, 20, 20, 'js/img/pluto.jpg');
+  const sun = createPlanet(2300, 80, 80, '../img/sun_2k.jpg');
+  const earth = createPlanet(100, 40, 40, '../img/earth_2k.jpg');
+  const mercury = createPlanet(60, 20, 20, '../img/mercury_2k.jpg');
+  const venus = createPlanet(90, 20, 20, '../img/venus_2k.jpg');
+  const mars = createPlanet(80, 20, 20, '../img/mars_2k.jpg');
+  const jupiter = createPlanet(350, 20, 20, '../img/jupiter_2k.jpg');
+  const saturn = createPlanet(230, 40, 40, '../img/saturn_2k.jpg');
+  const uranus = createPlanet(150, 40, 40, '../img/uranus_2k.jpg');
+  const neptune = createPlanet(140, 40, 40, '../img/neptune_2k.jpg');
+  const pluto = createPlanet(40, 20, 20, '../img/pluto_2k.jpg');
 
   scene.add(sun);
   scene.add(earth);
@@ -102,10 +114,8 @@ window.onload = () => {
     setDefaultRotation(neptune, t, 0.01, 17000);
     setDefaultRotation(pluto, t, 0.01, 20000);
 
-    navigateToPlanet(earth, camera);
-
     t += 0.01;
-    // controls.update();
+    controls.update();
     renderer.render(scene, camera);
   };
 
