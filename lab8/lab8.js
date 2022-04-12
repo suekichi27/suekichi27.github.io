@@ -168,7 +168,7 @@ window.onload = () => {
     vertex.x = Math.random() * 2 - 1;
     vertex.y = Math.random() * 2 - 1;
     vertex.z = Math.random() * 2 - 1;
-    vertex.multiplyScalar(3000);
+    vertex.multiplyScalar(2000);
     starsGeometry.vertices.push(vertex);
   }
 
